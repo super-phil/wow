@@ -23,13 +23,13 @@ public class ScheduleConfiguration {
     @Resource
     private EmailService emailService;
 
-    @Value("database.backup.path")
+    @Value("${database.backup.path}")
     private String backupPath;
-    @Value("database.backup.dbname")
+    @Value("${database.backup.dbname}")
     private String dbName;
-    @Value("spring.datasource.username")
+    @Value("${spring.datasource.username}")
     private String dbUser;
-    @Value("spring.datasource.password")
+    @Value("${spring.datasource.password}")
     private String dbPwd;
 
     /**
