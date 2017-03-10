@@ -23,7 +23,7 @@ import java.util.Map;
  * http://blog.csdn.net/catoop/article/details/50520958
  */
 @Configuration
-public class ShiroConfiguration {
+public class ShiroConfig {
 
     @Bean(name = "ehCacheManager")
     @DependsOn("lifecycleBeanPostProcessor")

@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @Slf4j
 @Configuration
 @EnableScheduling
-public class ScheduleConfiguration {
+public class ScheduleConfig {
     @Resource
     private EmailService emailService;
 

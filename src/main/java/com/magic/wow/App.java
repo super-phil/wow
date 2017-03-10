@@ -16,17 +16,5 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
-    /**
-     * 使用fastJson
-     *
-     * @return
-     */
-    @Bean
-    public HttpMessageConverters fastJsonHttpMessageConverters() {
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
-        fastConverter.setFastJsonConfig(fastJsonConfig);
-        return new HttpMessageConverters(fastConverter);
-    }
+
 }

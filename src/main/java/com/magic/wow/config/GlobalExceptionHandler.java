@@ -2,7 +2,7 @@ package com.magic.wow.config;
 
 import com.alibaba.fastjson.JSONException;
 import com.magic.wow.util.ResultUtils;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,11 +12,38 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 全局异常
+ * BindException  400 (Bad Request)
+ * <p>
+ * ConversionNotSupportedException 500 (Internal Server Error)
+ * <p>
+ * HttpMediaTypeNotAcceptableException 406 (Not Acceptable)
+ * <p>
+ * HttpMediaTypeNotSupportedException 415 (Unsupported Media Type)
+ * <p>
+ * HttpMessageNotReadableException 400 (Bad Request)
+ * <p>
+ * HttpMessageNotWritableException 500 (Internal Server Error)
+ * <p>
+ * HttpRequestMethodNotSupportedException 05 (Method Not Allowed)
+ * <p>
+ * MethodArgumentNotValidException 400 (Bad Request)
+ * <p>
+ * MissingPathVariableException 500 (Internal Server Error)
+ * <p>
+ * MissingServletRequestParameterException 400 (Bad Request)
+ * <p>
+ * MissingServletRequestPartException 400 (Bad Request)
+ * <p>
+ * NoHandlerFoundException 404 (Not Found)
+ * <p>
+ * NoSuchRequestHandlingMethodException 404 (Not Found)
+ * <p>
+ * TypeMismatchException 400 (Bad Request)
  * Created by zhaoxf on 2017/3/6.
  */
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    private Logger logger = Logger.getLogger(GlobalExceptionHandler.class);
      /*
         * 返回json数据或者String数据：
         * 那么需要在方法上加上注解：
@@ -46,7 +73,7 @@ public class GlobalExceptionHandler {
         mav.setViewName("error");
         //打印异常信息：
         e.printStackTrace();
-        logger.error("GlobalDefaultExceptionHandler.defaultErrorHandler()");
+        log.error("GlobalDefaultExceptionHandler.defaultErrorHandler()");
         return mav;
     }
 
@@ -55,8 +82,8 @@ public class GlobalExceptionHandler {
     public Object jsonErrorHandler(HttpServletRequest req, Exception e) {
         //打印异常信息：
         e.printStackTrace();
-        logger.error("GlobalDefaultExceptionHandler.jsonErrorHandler()");
-        return ResultUtils.error("JSON 解析异常",req.getRequestURL());
+        log.error("GlobalDefaultExceptionHandler.jsonErrorHandler()");
+        return ResultUtils.error("JSON 解析异常", req.getRequestURL());
 
 
     }
