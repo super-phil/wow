@@ -8,8 +8,9 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -24,7 +25,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 public class LoginController {
-    @RequestMapping(value = {"/", "/index", "/login"}, method = RequestMethod.GET)
+    @GetMapping({"", "index", "login"})
     public ModelAndView index(RedirectAttributes redirectAttributes, Model model) {
         Map<String, ?> flashAttributes = redirectAttributes.getFlashAttributes();
         if (!flashAttributes.isEmpty()) {//redirectAttributes 相当于重定向后携带隐藏参数 原理是先存到session 跳转完成后马上移除 安全
@@ -34,7 +35,7 @@ public class LoginController {
         return new ModelAndView("login");
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping("login")
     public ModelAndView login(@Valid User user, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         String username = user.getUsername();
         UsernamePasswordToken token = new UsernamePasswordToken(username, user.getPwd());
@@ -84,20 +85,20 @@ public class LoginController {
         }
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(RedirectAttributes redirectAttributes) {
+    @GetMapping("logout")
+    public ModelAndView logout(RedirectAttributes redirectAttributes) {
         //使用权限管理工具进行用户的退出，跳出登录，给出提示信息
         SecurityUtils.getSubject().logout();
         redirectAttributes.addFlashAttribute("msg", "您已安全退出");
-        return "redirect:/login";
+        return new ModelAndView("redirect:/home");
     }
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
+    @GetMapping("home")
     public ModelAndView home() {
         return new ModelAndView("home");
     }
 
-    @RequestMapping("/403")
+    @GetMapping("403")
     public String unauthorizedRole() {
         log.info("------没有权限-------");
         return "403";

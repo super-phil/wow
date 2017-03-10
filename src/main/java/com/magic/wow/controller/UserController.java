@@ -4,17 +4,12 @@ import com.magic.wow.model.DTRequest;
 import com.magic.wow.model.DTResponse;
 import com.magic.wow.model.User;
 import com.magic.wow.service.UserService;
-import com.magic.wow.util.ExcelUtils;
 import com.magic.wow.util.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.util.List;
 
 /**
@@ -22,13 +17,13 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UserController {
     @Resource
     private UserService userService;
     private int count = 1;
 
-    @RequestMapping(value = {"", "/index"}, method = RequestMethod.GET)
+    @GetMapping({"", "index"})
     public ModelAndView list() {
 
 //        for (int i = 0; i < 32; i++) {
@@ -57,9 +52,8 @@ public class UserController {
         return new ModelAndView("user");
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    @PostMapping("list")
     public DTResponse list(@RequestBody DTRequest dtRequest) {
-        log.info("-------------------");
         List<User> list = userService.findByQuery(dtRequest);
         DTResponse<User> dtResponse = new DTResponse<>();
         dtResponse.setDraw(dtRequest.getDraw());
@@ -70,7 +64,7 @@ public class UserController {
         return dtResponse;
     }
 
-    @RequestMapping("/add")
+    @PostMapping("add")
     public Object add(User user) {
         user.setUsername(user.getUsername().trim());
         userService.addUser(user);
@@ -78,7 +72,7 @@ public class UserController {
 
     }
 
-    @RequestMapping("/del")
+    @PostMapping("del")
     public Object add(int id) {
         System.out.println(userService.del(id));
         return ResultUtils.operationSuccess();

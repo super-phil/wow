@@ -18,21 +18,19 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/dkp")
+@RequestMapping("dkp")
 public class DkpController {
     @Resource
     private DkpService dkpService;
 
 
-    @RequestMapping(value = {"", "/index"}, method = RequestMethod.GET)
+    @GetMapping(value = {"", "index"})
     public ModelAndView list() {
-
         return new ModelAndView("dkp");
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
+    @PostMapping("list")
     public DTResponse list(@RequestBody DTRequest dtRequest) {
-        log.info("-------------------");
         List<Dkp> list = dkpService.findByQuery(dtRequest);
         DTResponse<Dkp> dtResponse = new DTResponse<>();
         dtResponse.setDraw(dtRequest.getDraw());
@@ -43,7 +41,7 @@ public class DkpController {
         return dtResponse;
     }
 
-    @RequestMapping("/add")
+    @PostMapping("add")
     public Object add(@RequestParam("id") String uid, @RequestParam("type") String role, String num, String username, String info, @RequestParam("dpk_type") String type, @RequestParam("dt") String dt) {
         Dkp dkp = new Dkp();
         dkp.setUsername(username);
@@ -58,7 +56,7 @@ public class DkpController {
 
     }
 
-    @RequestMapping("/del")
+    @PostMapping("del")
     public Object add(int id) {
         System.out.println(dkpService.del(id));
         return ResultUtils.operationSuccess();

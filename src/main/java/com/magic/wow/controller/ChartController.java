@@ -7,10 +7,7 @@ import com.google.common.collect.Maps;
 import com.magic.wow.service.ChartService;
 import com.magic.wow.util.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -28,13 +25,13 @@ public class ChartController {
     @Resource
     private ChartService chartService;
 
-    @RequestMapping(value = {"", "/index"}, method = RequestMethod.GET)
+    @GetMapping(value = {"", "index"})
     public ModelAndView list() {
 
         return new ModelAndView("dkp-chart");
     }
 
-    @RequestMapping(value = "/dkp", method = RequestMethod.POST)
+    @PostMapping("dkp")
     public Object dkpSort(@RequestParam(defaultValue = "3", required = false) String n) {
         List<Map<String, Object>> maps = chartService.groupByType(Integer.valueOf(n));//前三
         /**
