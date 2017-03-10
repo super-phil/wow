@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+##    <!--在移动设备浏览器上，通过为视口（viewport）设置 meta 属性为 user-scalable=no 可以禁用其缩放（zooming）功能。这样禁用缩放功能后，用户只能滚动屏幕，就能让你的网站看上去更像原生应用的感觉 width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no-->
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+##    <!--让部分国产浏览器默认采用高速模式渲染页面 360浏览器支持-->
+    <meta name="renderer" content="webkit">
+##    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="/favicon.ico">
+    <title>会员列表</title>
+##    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+##    <!--表格-->
+    <link rel="stylesheet" href="/js/dataTables/dataTables.bootstrap.min.css">
+##    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/js/font-awesome/css/font-awesome.min.css">
+##    <!--弹窗-->
+    <link rel="stylesheet" href="/js/sweetalert/sweetalert.css">
+##    <!-- 验证-->
+    <link rel="stylesheet" href="/js/nice-validator/jquery.validator.css">
+##    <!--自定义 -->
+    <link rel="stylesheet" href="/css/sys.css">
+</head>
+<body>
+    #parse("navbar.tpl")
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12#* col-sm-9 col-md-10 *#">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <h3 class="panel-title">会员列表</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 hidden-xs">
+                            <button type="button" class="btn-add btn btn-success">
+                                添加
+                            </button>
+                        </div>
+                        <div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-4 col-md-4 col-md-offset-6">
+                            <div class="input-group input-group-sm">
+                                <input id="table-search" type="text" name="q" class="form-control" placeholder="search"
+                                       autocomplete="off">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn-search btn btn-default"><i
+                                            class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="data-list" class="table table-bordered table-condensed table-striped table-hover display"
+                           width="100%">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+##        <div class="col-sm-3 col-md-2 hidden-xs">
+##            #parse("rigth.tpl")
+##        </div>
+    </div>
+</div>
+<!-- /.container -->
+<!-- .add modal -->
+<div class="modal fade" id="add-modal">
+    <div class="modal-dialog">
+        <div class="modal-content span12">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加会员</h4>
+            </div>
+            <form id="add-form" class="form-horizontal" method="post" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">会员名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" placeholder="角色名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">职业</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="type">
+                                <option value="战士">战士</option>
+                                <option value="牧师">牧师</option>
+                                <option value="法师">法师</option>
+                                <option value="术士">术士</option>
+                                <option value="猎人">猎人</option>
+                                <option value="潜行者">潜行者</option>
+                                <option value="德鲁伊">德鲁伊</option>
+                                <option value="萨满祭司">萨满祭司</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-danger">清空</button>
+                    <button type="button" class="btn-add-form-submit btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.add modal -->
+<!-- .+ modal -->
+<div class="modal fade" id="opt-modal">
+    <div class="modal-dialog">
+        <div class="modal-content span12">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">DKP操作</h4>
+            </div>
+            <form id="opt-form" class="form-horizontal" method="post" autocomplete="off">
+                <div class="modal-body">
+                ##                    用户ID
+                    <input type="hidden" name="id"> <!--- 表单隐藏域 -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">会员名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="username" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">职业</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="type" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">时间</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" name="dt" required>
+                            <span>例如:2017-02-03</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">DKP类型</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="dpk_type">
+                                <option value="消费扣分">消费扣分</option>
+                                <option value="活动加分">活动加分</option>
+                                <option value="活动扣分">活动扣分</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">分值</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" name="num" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">备注</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="info" rows="3" placeholder="备注"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                ##                    <button type="reset" class="btn btn-danger">清空</button>
+                    <button type="button" class="btn-opt-form-submit btn btn-primary">提交</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.+ modal -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<!--表格-->
+<script src="/js/dataTables/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables/dataTables.bootstrap.min.js"></script>
+<script src="/js/dataTables/dataTables.zh-CN.js"></script>
+<!--弹窗-->
+<script src="/js/sweetalert/sweetalert.min.js"></script>
+<!--验证-->
+<script src="/js/nice-validator/jquery.validator.min.js"></script>
+<script src="/js/nice-validator/zh-CN.js"></script>
+<!--自定义-->
+<script src="/js/sys.js"></script>
+
+
+<script>
+    $(function () {
+        var add_modal = $('#add-modal');
+        var opt_modal = $('#opt-modal');
+        var assign_modal = $('#assign-modal');
+        add_modal.modal({
+            backdrop: true,
+            show: false,
+            keyboard: true
+        });
+        opt_modal.modal({
+            backdrop: true,
+            show: false,
+            keyboard: true
+        });
+        var table = $('#data-list').DataTable({
+            "ajax": {
+                "url": "/user/list",
+                "type": "post",
+                "contentType": "application/json;charset=UTF-8",
+                "data": function (data) {
+                    return JSON.stringify(data);
+                }
+            },
+            "columns": [
+//                {"data": "id", "title": "ID", "searchable": false},
+                {"data": "username", "title": "会员"},
+                {"data": "type", "title": "职业"},
+                {"data": "dynamic", "title": "调节分"},
+                {"data": "consume", "title": "消费"},
+                {
+                    "data": null, "title": "当前", "render": function (data, type, row) {
+                    return row.dynamic + row.consume;
+                }
+                },
+//                {
+//                    "data": "createTime", "title": "创建时间", "render": function (data, type, row) {
+//                    return new Date(data).format("yyyy-MM-dd HH:mm:ss");
+//                }
+//                },
+//                {"data": "mark", "title": "mark"},
+                {"data": null, "title": "操作", "width": "140px", "searchable": false, "orderable": false}//不参与排序和查询
+            ],
+            "columnDefs": [{
+                "targets": -1,
+                "render": function (data, type, row) {
+                    return ' &nbsp; <button class="btn-opt btn btn-xs btn-success" data-id="' + row.id + '">操作</button> &nbsp; <button class="btn-del btn btn-xs btn-danger" data-id="' + row.id + '">删除</button>';
+                }
+//                "defaultContent": "<button class='btn-edit btn btn-xs btn-info'>编辑</button> <button class='btn-del btn btn-xs btn-danger'>删除</button>"//添加按钮
+            }]
+        });
+        //隐藏默认的搜索
+        $(".dataTables_filter").hide();
+        //自定义搜索
+        $('#table-search').keydown(function (e) {
+            var keynum = window.event ? e.keyCode : e.which;
+            if (13 == keynum) {//回车
+//                var q = $(':text[name="q"]').val();
+                table.search(this.value).draw();
+            }
+        })
+        $('.btn-search').click(function () {
+            var q = $(':text[name="q"]').val();
+            table.search(q).draw();
+        });
+        //添加
+        $('.btn-add').click(function () {
+            add_modal.modal("show");
+        });
+        $('#add-form').validator({
+            theme: "simple_top",
+            fields: {
+                'username': 'required; username;'
+//                'mobile': 'required; mobile;',
+//                'email': 'required; email;'
+            },
+            // 获取display
+            display: function (el) {
+                return el.getAttribute('placeholder') || '';
+            },
+            valid: function (form) {
+                //表单验证通过，提交表单到服务器
+                sys.submit(form, "/user/add", function (data) {
+                    table.ajax.reload();
+                    add_modal.modal("hide");
+                });
+            }
+        }).on('click', '.btn-add-form-submit', function (e) {
+            $(e.delegateTarget).trigger("validate");
+        });
+
+        //编辑
+        $(document).on('click', '.btn-opt', function () {
+            var _this = $(this);
+            var _tr = _this.parent().parent()[0];
+            var data = table.row(_tr).data();
+            for (var obj in data) {
+                $('#opt-form input[name=' + obj + ']').val(data[obj]);
+                $('#opt-form textarea[name=' + obj + ']').text(data[obj]);
+            }
+            opt_modal.modal("show");
+        });
+        $('#opt-form').validator({
+            theme: "simple_top",
+            fields: {
+                'num': 'required; zdigits;',
+                'dt': 'required; date;',
+            },
+            // 获取display
+            display: function (el) {
+                return el.getAttribute('placeholder') || '';
+            },
+            valid: function (form) {
+                //表单验证通过，提交表单到服务器
+                sys.submit(form, "/dkp/add", function () {
+                    table.ajax.reload();
+                    opt_modal.modal("hide");
+                });
+            }
+        }).on('click', '.btn-opt-form-submit', function (e) {
+            $(e.delegateTarget).trigger("validate");
+        });
+
+
+        //删除
+        $(document).on('click', '.btn-del', function () {
+            var _this = $(this);
+            var id = _this.data('id');
+            sys.confirm("", function () {
+                sys.del("/user/del", id, function () {
+                    table.ajax.reload();
+                })
+            });
+        });
+    })
+</script>
+</body>
+</html>

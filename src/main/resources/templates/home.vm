@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--在移动设备浏览器上，通过为视口（viewport）设置 meta 属性为 user-scalable=no 可以禁用其缩放（zooming）功能。这样禁用缩放功能后，用户只能滚动屏幕，就能让你的网站看上去更像原生应用的感觉 width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no-->
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <!--让部分国产浏览器默认采用高速模式渲染页面 360浏览器支持-->
+    <meta name="renderer" content="webkit">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="/favicon.ico">
+    <title>The Lost Time Group</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <!--自定义 -->
+    <link rel="stylesheet" href="/css/sys.css">
+</head>
+<body>
+    #parse("navbar.tpl")
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-10 ">
+            <div class="panel panel-info">
+##                <div class="panel-heading">
+##                    <div class="row">
+##                        <div class="col-xs-12 col-sm-4 col-md-4">
+##                            <h3 class="panel-title">公会管理制度（暂行）</h3>
+##                        </div>
+##                    </div>
+##                </div>
+                <div class="panel-body">
+                    <div id="container">
+                        <div style="text-align: center"><h2>公会管理制度（暂行）</h2></div>
+
+                        <pre>
+
+一：作息时间：
+    1）RIAD开组时间为7：00。7点10算集合分.若20：00还未满足RAID要求则该天活动取消。DKP管理员负责记录集合分。 。
+    2）团队成员想活动的必须在7.20点前进组, 如有特殊原因可能迟到或无法参加活动的需提前请假，
+    没有请假的人员20.00分以后进组将直接替补；20:30以后到场的人员根据本制度第一条直接取消本次活动资格。
+    因重大原因无法提前请假的可在恢复活动后找相关官员申诉，将依据实际情况予以处理。
+    9点以后来的如果没正当理由直接取消本次活动资格
+.
+二：组队原则：
+    先进组的优先参加活动，FM装备不符合要求的无条件出去TB，团队配置由RL决定，一切以团队需要为主，被换出去TB的照样有DKP奖励。
+    新人根据表现由RL换人进组，划水者无条件TB。
+
+三：替补原则：
+    1）替补在活动结束前下线的，不能获得此后BOSS的奖励和解散分。
+    2）成员替补时可以不在线，但是YY里待机是必须的，RL喊到3次不应的视为下线，失  去TB资格。会员离开公会DKP清零。
+    3）开荒时活动人员享有双倍DKP，待命人员同样享有双倍DKP。 (必须无CD人员享有)
+    4）新团员入团稳定活动2周以上的给予一定的DKP奖励及补分
+
+四：DKP制度：
+    1)每次集合分为5DKP；超过集合分结算时间还未入团的，无集合分数。
+    2)解散分为5DKP，提前下线的无解散分。
+    3）每个BOSS 5分，（特殊BOSS得分由RL临时更改）。
+    4）散件30分，套装20分，饰品30分,武器40分。（如有特殊装备，由RL更改武器饰品分）
+    5）前三周DKP不够的情况下，由RL决定有资格ROLL的团员ROLL，DKP照常扣，有异议私M RL。
+    6）开荒阶段由RL决定是否双倍DKP。
+
+五：人员调配制度：
+    在队伍职业配备不均衡或者特殊BOSS需要人员调配的时候，以团队利益为第一位。被调换待命人员依然享有全程DKP，擅自离团除外。
+
+六：副本活动细则：
+    1）副本活动开始那一刻起，所有参加团员必须听从团长指挥，不听指挥团长有权利视情况扣除DKP。
+    2）在公会副本活动时间内，活动人员如果要离开必须提前与团长和大家打招呼。如果不打招呼私自AFK，扣除10DKP。
+    私自离团或者下线，扣除10DKP。如果因为不可抗拒的特殊因素必须离开（断电、家长逼迫、计算机损坏等），
+    活动结束的两天时间内或者下次上线时，必须主动找当时团长或官员解释。如果没有任何解释等同私自离队处理。
+    3）在公会副本活动中，打倒BOSS之后，在分配装备的时候，会员禁止在YY和团队频道发言。一切按照团长要求操作。
+    一般是团长打出一件装备，然后告诉大家多少DKP分数,有需求就直接带着装备M团长。
+    4）所有职业根据RAID需要提前洗副本天赋。  5）公会活动必须提前上好YY
+
+七：副本活动奖罚：
+    以公正公平为准则，以主RL当场视表现奖扣分为主。
+
+八：装备分配：
+    1）装备分配一切听从RL当场分配，有异议可以私M团长，不得公开发表任何带有强烈感 情色彩的言论，违者视情况处罚
+    2）开荒阶段，装备优先团队重点培养的T和治疗，
+    3）团长在必要的时候有权利团强制分配。
+    4）公会允许会员以DKP出分的方式竞拍某件物品，全部以团队频道明拍的形式进行竞拍，体现在MC掉落的敏感职业SP和武器，
+    以碧空之歌单手剑为例，该物品基础分为40分，允许持有DKP的会员竞拍，但是如果竞拍分数超过了本物品初始DKP的4倍，
+    也就是160分的时候，团队将暂停竞拍，由当前剩余有效DKP最多的会员享有以160分的DKP获得该物品的权利，
+    如果该会员放弃，则由参加竞拍的且DKP剩余第二名的会员享有以160分的DKP获得该物品的权利，以此类推。
+
+九：团队资金
+    公会可以由会员捐赠部分G，另外团队掉落装绑，由RL视情况出售，所得G存公会银行，  开启公会修理和准备食物合计。
+
+十一:橙武分配原则
+    橙色武器分配，由团队对RL指定有资格的少数人进行投票，选定人选后，其他人不得有任何异议。
+    候选人员必须能得到团队所有人承认，能做到出勤高，不划水，对团队有重大贡献。
+    同时，橙武所有者对当前部位装备需求优先级低于其他同级别DPS，具体情况以RL临时公布为准，如有异议，私M RL或者会长。
+
+十一: 关于指挥：
+    团队采用多位指挥，以主RL为主多名为辅共同完成。主RL负责BOSS技能讲解战术安排，
+    对于战术安排有异议者可在活动结束前后发表自己意见，主RL有对团队绝对的权利。
+
+十二：关于其他
+    未正式开始BOSS战斗前，允许YY聊天，BOSS战开始，除主副RL外所有人闭麦，
+    战斗过程中除RL看情况允许的部分人可以开F2麦以外，任何人不得私自开麦，违者警告禁麦，3次警告看情况扣DKP。
+    （喜欢聊天的团员请自备品质优良的麦克风，杂音很大的不会被允许开麦）       请参加活动的团员自觉加工会QQ   。
+    具体团队活动动向请自觉查看工会公告。
+                    </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-2 hidden-xs">
+            #parse("rigth.tpl")
+        </div>
+    </div>
+</div>
+##<script src="/js/jquery.min.js"></script>
+##<script src="/bootstrap/js/bootstrap.min.js"></script>
+##<!-- highcharts 图表 -->
+##<script src="/js/highcharts/highcharts.js"></script>
+##<script src="/js/highcharts/exporting.js"></script>
+##<script type="text/javascript">
+##    $(function () {
+##        var interval = 5000;
+##        $('#fqcy').change(function () {
+##            interval = $("#fqcy").val() * 1000;
+##        });
+##        $('#container').highcharts({
+##            chart: {
+##                type: 'spline',
+##                animation: Highcharts.svg, // don't animate in old IE
+##                marginRight: 10,
+##                events: {
+##                    load: function () {
+##                        var series = this.series[0];
+##                        setInterval(function () {
+##                            $.ajax({
+##                                type: 'POST',
+##                                url: "/home/ajax",
+##                                data: {"interval": interval},
+##                                dataType: 'json',
+##                                success: function (result) {
+##                                    var x, y;
+##                                    x = result.obj.x;
+##                                    y = result.obj.y;
+##                                    console.info(x + "-----" + y);
+##                                    series.addPoint([x, y], true, true);
+##                                }
+##                            });
+##                        }, interval);
+##                    }
+##                }
+##            },
+##            title: {
+##                text: '<span>CPU实时监控</span>',
+##                style: {"color": "red", "fontSize": "18px"},
+##
+##                useHTML: true
+##
+##            },
+##            xAxis: {
+##                type: 'category'
+##            },
+##            yAxis: {
+##                title: {
+##                    text: 'CPU使用率'
+##                },
+##                plotLines: [{
+##                    value: 0,
+##                    width: 1,
+##                    color: '#808080'
+##                }]
+##            },
+##            series: [{
+##                name: '使用率',
+##                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+##            }]
+##        });
+##    });
+##</script>
+</body>
+</html>

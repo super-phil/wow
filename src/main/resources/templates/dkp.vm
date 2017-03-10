@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+##    <!--在移动设备浏览器上，通过为视口（viewport）设置 meta 属性为 user-scalable=no 可以禁用其缩放（zooming）功能。这样禁用缩放功能后，用户只能滚动屏幕，就能让你的网站看上去更像原生应用的感觉 width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no-->
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+##    <!--让部分国产浏览器默认采用高速模式渲染页面 360浏览器支持-->
+    <meta name="renderer" content="webkit">
+##    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link rel="icon" href="/favicon.ico">
+    <title>DKP详情</title>
+##    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+##    <!--表格-->
+    <link rel="stylesheet" href="/js/dataTables/dataTables.bootstrap.min.css">
+##    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/js/font-awesome/css/font-awesome.min.css">
+##    <!--弹窗-->
+    <link rel="stylesheet" href="/js/sweetalert/sweetalert.css">
+##    <!--自定义 -->
+    <link rel="stylesheet" href="/css/sys.css">
+</head>
+<body>
+    #parse("navbar.tpl")
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12#* col-sm-9 col-md-10 *#">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <h3 class="panel-title">DKP详情</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2 hidden-xs">
+                        ##                            <button type="button" class="btn-add btn btn-success">
+##                                添加
+##                            </button>
+                        </div>
+                        <div class="col-xs-6 col-xs-offset-6 col-sm-6 col-sm-offset-4 col-md-4 col-md-offset-6">
+                            <div class="input-group input-group-sm">
+                                <input id="table-search" type="text" name="q" class="form-control" placeholder="search"
+                                       autocomplete="off">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn-search btn btn-default"><i
+                                            class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table id="data-list" class="table table-bordered table-condensed table-striped table-hover display"
+                           width="100%">
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+##        <div class="col-sm-3 col-md-2 hidden-xs">
+##            #parse("rigth.tpl")
+##        </div>
+    </div>
+</div>
+<!-- /.container -->
+
+<script src="/js/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<!--表格-->
+<script src="/js/dataTables/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables/dataTables.bootstrap.min.js"></script>
+<script src="/js/dataTables/dataTables.zh-CN.js"></script>
+<!--弹窗-->
+<script src="/js/sweetalert/sweetalert.min.js"></script>
+<!--自定义-->
+<script src="/js/sys.js"></script>
+
+
+<script>
+    $(function () {
+
+        var table = $('#data-list').DataTable({
+            "ajax": {
+                "url": "/dkp/list?",
+                "type": "post",
+                "contentType": "application/json;charset=UTF-8",
+                "data": function (data) {
+                    data.q = "Dalny";
+                    return JSON.stringify(data);
+                }
+            },
+            "columns": [
+//                {"data": "id", "title": "ID", "searchable": false},
+                {"data": "username", "title": "会员"},
+                {"data": "role", "title": "职业"},
+                {"data": "type", "title": "类型"},
+                {
+                    "data": "num", "title": "分值", "render": function (data, type, row) {
+                    if ("消费扣分" == row.type) {
+                        return "-" + data;
+                    } else {
+                        return "+" + data;
+                    }
+                }
+                },
+                {"data": "info", "title": "备注"},
+                {
+                    "data": "createTime", "title": "操作时间", "render": function (data, type, row) {
+                    return new Date(data).format("yyyy-MM-dd");
+                }
+                },
+//                {"data": "mark", "title": "mark"},
+                {"data": null, "title": "操作", "width": "40xp", "searchable": false, "orderable": false}//不参与排序和查询
+            ],
+            "columnDefs": [{
+                "targets": -1,
+                "render": function (data, type, row) {
+                    return '<button class="btn-del btn btn-xs btn-danger" data-id="' + row.id + '">删除</button>';
+                }
+//                "defaultContent": "<button class='btn-edit btn btn-xs btn-info'>编辑</button> <button class='btn-del btn btn-xs btn-danger'>删除</button>"//添加按钮
+            }]
+        });
+        //隐藏默认的搜索
+        $(".dataTables_filter").hide();
+        //自定义搜索
+        $('#table-search').keydown(function (e) {
+            var keynum = window.event ? e.keyCode : e.which;
+            if (13 == keynum) {//回车
+//                var q = $(':text[name="q"]').val();
+                table.search(this.value).draw();
+            }
+        })
+        $('.btn-search').click(function () {
+            var q = $(':text[name="q"]').val();
+            table.search(q).draw();
+        });
+        //删除
+        $(document).on('click', '.btn-del', function () {
+            var _this = $(this);
+            var id = _this.data('id');
+            sys.confirm("", function () {
+                sys.del("/dkp/del", id, function () {
+                    table.ajax.reload();
+                })
+            });
+        });
+    })
+</script>
+</body>
+</html>
