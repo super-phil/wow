@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
  * Created by zhaoxf on 2017/3/6.
  */
 @ControllerAdvice
-public class GlobalDefaultExceptionHandler {
-    private Logger logger = Logger.getLogger(GlobalDefaultExceptionHandler.class);
+public class GlobalExceptionHandler {
+    private Logger logger = Logger.getLogger(GlobalExceptionHandler.class);
      /*
         * 返回json数据或者String数据：
         * 那么需要在方法上加上注解：

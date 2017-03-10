@@ -4,11 +4,10 @@ import com.magic.wow.mapper.UserMapper;
 import com.magic.wow.model.DTRequest;
 import com.magic.wow.model.User;
 import com.magic.wow.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * app
@@ -17,7 +16,7 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @Override

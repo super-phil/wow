@@ -10,19 +10,20 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.crypto.hash.Sha1Hash;
-import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * Created by zhaoxf on 2017/3/6.
  */
 public class WowRealm extends AuthorizingRealm {
     private Logger logger = Logger.getLogger(WowRealm.class);
-    @Autowired
+    @Resource
     private UserService userService;
+
     public WowRealm() {//加密验证
         setName("WowRealm");
         HashedCredentialsMatcher hcm = new HashedCredentialsMatcher();
@@ -84,6 +85,7 @@ public class WowRealm extends AuthorizingRealm {
         }
         return null;
     }
+
     public static void main(String[] args) {
 //        System.out.println("cd5ea73cd58f827fa78eef7197b8ee606c99b2e6".length());
         System.out.println(new Sha1Hash("123456", "test").toHex());

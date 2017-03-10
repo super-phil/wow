@@ -7,13 +7,13 @@ import com.google.common.collect.Maps;
 import com.magic.wow.service.ChartService;
 import com.magic.wow.util.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +25,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("chart")
 public class ChartController {
-    @Autowired
+    @Resource
     private ChartService chartService;
-//    private Logger logger = Logger.getLogger(ChartController.class);
 
     @RequestMapping(value = {"", "/index"}, method = RequestMethod.GET)
     public ModelAndView list() {

@@ -7,10 +7,10 @@ import com.magic.wow.service.DkpService;
 import com.magic.wow.util.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/dkp")
 public class DkpController {
-    @Autowired
+    @Resource
     private DkpService dkpService;
 
 

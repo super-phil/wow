@@ -113,7 +113,7 @@ public class ShiroConfiguration {
     @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter() {
 
-        ShiroFilterFactoryBean bean = new MShiroFilterFactoryBean();
+        ShiroFilterFactoryBean bean = new WowShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager());
         bean.setLoginUrl("/login");
         bean.setSuccessUrl("/home");

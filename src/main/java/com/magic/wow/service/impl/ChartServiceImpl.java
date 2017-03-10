@@ -1,12 +1,10 @@
 package com.magic.wow.service.impl;
 
 import com.magic.wow.mapper.ChartMapper;
-import com.magic.wow.mapper.DkpMapper;
-import com.magic.wow.mapper.UserMapper;
 import com.magic.wow.service.ChartService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +14,9 @@ import java.util.Map;
 @Service
 public class ChartServiceImpl implements ChartService {
 
-//    @Autowired
+    //    @Resource
 //    private DkpMapper dkpMapper;
-    @Autowired
+    @Resource
     private ChartMapper chartMapper;
 
     @Override

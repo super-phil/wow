@@ -5,9 +5,9 @@ import com.magic.wow.mapper.UserMapper;
 import com.magic.wow.model.DTRequest;
 import com.magic.wow.model.Dkp;
 import com.magic.wow.service.DkpService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,9 +16,9 @@ import java.util.List;
 @Service
 public class DkpServiceImpl implements DkpService {
 
-    @Autowired
+    @Resource
     private DkpMapper dkpMapper;
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
 

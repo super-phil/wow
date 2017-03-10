@@ -21,11 +21,11 @@ import java.util.Set;
 /**
  * Created by zhaoxf on 2017/3/6.
  */
-public class MShiroFilterFactoryBean extends ShiroFilterFactoryBean {
+public class WowShiroFilterFactoryBean extends ShiroFilterFactoryBean {
     // 对ShiroFilter来说，需要直接忽略的请求
     private Set<String> ignoreExt;
 
-    public MShiroFilterFactoryBean() {
+    public WowShiroFilterFactoryBean() {
         super();
         ignoreExt = new HashSet<>();
         ignoreExt.add(".jpg");

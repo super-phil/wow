@@ -2,6 +2,7 @@ package com.magic.wow.config;
 
 import com.alibaba.fastjson.JSON;
 import com.magic.wow.util.ResultUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.Logger;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.StringUtils;
@@ -18,13 +19,13 @@ import java.io.PrintWriter;
 /**
  * Created by zhaoxf on 2017/3/6.
  */
+@Slf4j
 public class WowFilter extends AuthorizationFilter {
-    private static final Logger logger = Logger.getLogger(WowFilter.class);
 
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object object) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-        logger.info("自定义授权过滤器!" + httpServletRequest.getRequestURI());
+        log.info("自定义授权过滤器!" + httpServletRequest.getRequestURI());
         //得到subject
         Subject subject = getSubject(servletRequest, servletResponse);
         boolean isPermitted = false;
@@ -33,11 +34,11 @@ public class WowFilter extends AuthorizationFilter {
             for (String perm : perms) {
                 boolean permitted = subject.hasRole(perm);
                 if (permitted) {
-                    logger.info(String.format("有[%s]权限!", perm));
+                    log.info(String.format("有[%s]权限!", perm));
                     isPermitted = true;
                     break;
                 } else {
-                    logger.error(String.format("没有[%s]权限!", perm));
+                    log.error(String.format("没有[%s]权限!", perm));
                 }
             }
         }
